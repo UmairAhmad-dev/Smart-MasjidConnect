@@ -1,0 +1,8 @@
+// postcss.config.js
+export default {
+  plugins: {
+    'postcss-import': {}, // Required for Tailwind v4 compatibility
+    '@tailwindcss/postcss': {}, // CRUCIAL UPDATED PLUGIN
+    autoprefixer: {}, // Keep this for cross-browser styling
+  },
+}

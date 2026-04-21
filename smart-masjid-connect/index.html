@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>smart-masjid-connect</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'masjid-dark': '#0f172a', // Dark blue footer theme
+          'masjid-gold': '#f59e0b', // Accent gold buttons
+          'masjid-accent': '#38bdf8', // Light blue elements
+        },
+      },
+      // Ensure we explicitly use serif font for Urdu localization
+      fontFamily: {
+        serif: ['"Noto Serif"', 'serif'],
+        sans: ['"Inter"', 'sans-serif'],
+      },
+    }
+  }
+</script>
+<style type="text/tailwindcss">
+  /* Optional: Basic base styles to match the design board */
+  @layer base {
+    body {
+      @apply bg-slate-50 text-slate-900;
+    }
+    /* Simple RTL support for Urdu localization */
+    [dir="rtl"] {
+      @apply text-right;
+    }
+  }
+</style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

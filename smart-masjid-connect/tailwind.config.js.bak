@@ -1,0 +1,18 @@
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}", // CRUCIAL: Tells Tailwind where to look for your classes
+  ],
+  theme: {
+    extend: {
+      colors: {
+        'masjid-dark': '#0f172a',    // Dark blue/slate (footer theme)
+        'masjid-gold': '#f59e0b',    // Accent gold (buttons)
+        'masjid-accent': '#38bdf8',  // Light blue (prayer table background)
+      },
+    },
+  },
+  plugins: [],
+}

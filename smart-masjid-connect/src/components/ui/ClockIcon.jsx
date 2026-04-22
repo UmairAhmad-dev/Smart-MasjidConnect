@@ -1,11 +1,6 @@
-// src/components/ui/ClockIcon.jsx
-// Finalized UI version for midterm demo.
-
-// Unique minimal high-fidelity aesthetic standard, ensuring professional look (referencing image_19.png diagnostic standard)
 export default function ClockIcon({ className }) {
   return (
-    // We retain the rounded-full bg-blue-100 container for a beautiful badge effect Turn 8 adaptation unique visualization standard.
-    // We allow the passed className to still apply additional external styling.
+
     <div className={`rounded-full bg-blue-100 flex items-center justify-center p-3 transition-colors hover:bg-masjid-accent/20 ${className}`}>
       
       {/* PROFESSIONAL SVG ICON: We replace the emoji with a clean SVG adapted from design cards icon standards (image_3.png cards quality visualized in Turnpike 1 adaptation unique visualization) */}

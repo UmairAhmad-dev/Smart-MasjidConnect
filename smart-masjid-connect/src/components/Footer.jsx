@@ -9,7 +9,7 @@ export default function Footer({ t }) {
         </div>
         <div className="text-sm md:text-right">
           <p>&copy; 2026 {t.projectName}. All rights reserved.</p>
-          <p>Developed by: Umair Nadeem</p>
+          {/*<p>Developed by: Umair Nadeem</p>*/}
         </div>
       </div>
     </footer>

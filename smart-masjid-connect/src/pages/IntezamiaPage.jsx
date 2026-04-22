@@ -16,7 +16,7 @@ export default function IntezamiaPage({ t }) {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
         {mockIntezamia.map(member => (
           <div key={member._id} className="bg-white p-8 rounded-2xl shadow border border-slate-100 text-center flex flex-col items-center gap-4 transition-transform hover:scale-105">
-            {/* Medallion from image_6.png style, simple icon for midterm */}
+    
             <div className="h-24 w-24 rounded-full bg-masjid-gold flex items-center justify-center font-bold text-white text-3xl">👤</div>
             <div>
                 <p className="text-xl font-extrabold text-masjid-dark">{member.name}</p>

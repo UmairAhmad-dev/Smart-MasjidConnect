@@ -1,11 +1,24 @@
 // controllers/announcementController.js
-import Announcement from '../models/Announcement.js'; // Ensure .js extension is present
+import Announcement from '../models/Announcement.js';
 
-// @desc    Get all announcements
+// @desc    Get all announcements (WITH SEARCH LOGIC)
 // @route   GET /api/announcements
 export const getAnnouncements = async (req, res) => {
   try {
-    const announcements = await Announcement.find().sort({ createdAt: -1 }); // Newest first
+    const { keyword } = req.query;
+    let query = {};
+
+    // This is the search logic we just built
+    if (keyword && keyword !== '') {
+      query = {
+        $or: [
+          { title: { $regex: keyword, $options: 'i' } },
+          { content: { $regex: keyword, $options: 'i' } }
+        ]
+      };
+    }
+
+    const announcements = await Announcement.find(query).sort({ createdAt: -1 });
     res.status(200).json({ success: true, count: announcements.length, data: announcements });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -16,7 +29,6 @@ export const getAnnouncements = async (req, res) => {
 // @route   POST /api/announcements
 export const createAnnouncement = async (req, res) => {
   try {
-    // Assuming request body contains fields defined in your model (e.g., title, content)
     const announcement = await Announcement.create(req.body);
     res.status(201).json({ success: true, data: announcement });
   } catch (error) {
@@ -28,16 +40,13 @@ export const createAnnouncement = async (req, res) => {
 // @route   GET /api/announcements/:id
 export const getAnnouncement = async (req, res) => {
   try {
-    // CRITICAL: We use 'await' before 'Announcement.findById'
     const announcement = await Announcement.findById(req.params.id);
-
     if (!announcement) {
       return res.status(404).json({ success: false, message: 'Announcement not found' });
     }
     res.status(200).json({ success: true, data: announcement });
   } catch (error) {
-    // This catch often handles invalid MongoDB ObjectId formats
-    res.status(400).json({ success: false, message: `Invalid ID format: ${error.message}` });
+    res.status(400).json({ success: false, message: `Invalid ID format` });
   }
 };
 
@@ -45,14 +54,10 @@ export const getAnnouncement = async (req, res) => {
 // @route   PUT /api/announcements/:id
 export const updateAnnouncement = async (req, res) => {
   try {
-    // CRITICAL: We use 'await' before 'Announcement.findByIdAndUpdate'
-    // { new: true } returns the updated document
-    // { runValidators: true } ensures the update respects model validation rules
     const announcement = await Announcement.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
     });
-
     if (!announcement) {
       return res.status(404).json({ success: false, message: 'Announcement not found' });
     }
@@ -66,13 +71,10 @@ export const updateAnnouncement = async (req, res) => {
 // @route   DELETE /api/announcements/:id
 export const deleteAnnouncement = async (req, res) => {
   try {
-    // CRITICAL: We use 'await' before 'Announcement.findByIdAndDelete'
     const announcement = await Announcement.findByIdAndDelete(req.params.id);
-
     if (!announcement) {
       return res.status(404).json({ success: false, message: 'Announcement not found' });
     }
-    // Standard practice for DELETE is to return success but an empty data object
     res.status(200).json({ success: true, data: {} });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });

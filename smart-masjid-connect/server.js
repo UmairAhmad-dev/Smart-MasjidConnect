@@ -6,6 +6,7 @@ import connectDB from './config/db.js';
 import announcementRoutes from './routes/announcementRoutes.js';
 import prayerTimeRoutes from './routes/prayerTimeRoutes.js';
 import hadithRoutes from './routes/hadithRoutes.js';
+import memberRoutes from './routes/memberRoutes.js';
 
 // Load env vars
 dotenv.config();
@@ -14,11 +15,6 @@ dotenv.config();
 connectDB();
 
 const app = express();
-
-// === 2. IMPORTANT: APPLY MIDDLEWARE ===
-
-// A. Enable CORS for ALL origins (safest for development)
-// You MUST place this BEFORE defining any routes.
 app.use(cors()); 
 
 // B. Body parser (allows reading JSON in requests)
@@ -29,6 +25,7 @@ app.use(express.json());
 app.use('/api/announcements', announcementRoutes);
 app.use('/api/prayertimes', prayerTimeRoutes);
 app.use('/api/hadith', hadithRoutes);
+app.use('/api/members', memberRoutes);
 
 const PORT = process.env.PORT || 5000;
 
